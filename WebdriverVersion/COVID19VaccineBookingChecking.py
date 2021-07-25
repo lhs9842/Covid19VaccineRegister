@@ -27,10 +27,11 @@ co = driver.get_cookies()
 cookies = {}
 for c in co:
     cookies[c['name']] = c['value']
+head = {'Host': 'vaccine.kakao.com', 'User-Agent':'Mozilla/5.0 (Linux; Android 11; SM-G975N Build/RP1A.200720.012; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/91.0.4472.164 Mobile Safari/537.36;KAKAOTALK 2309420;KAKAOTALK'}
 print("예약 시도를 시작합니다. 브라우저를 닫지 마세요.")
 print("도중에 중단하려면 브라우저를 닫지 마시고 Ctrl+C를 이 창에서 누르세요.")
 while True:
-    res = requests.get("https://vaccine.kakao.com/api/v2/org/org_code/" + str(orgCode), cookies = cookies, verify = False)
+    res = requests.get("https://vaccine.kakao.com/api/v2/org/org_code/" + str(orgCode), cookies = cookies, headers=head, verify = False)
     result = res.json()
     for a in result['lefts']:
         if a['leftCount'] != 0:
